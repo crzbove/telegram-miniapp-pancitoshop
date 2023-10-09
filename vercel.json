@@ -1,0 +1,36 @@
+{
+    "rewrites": [
+        {
+            "source": "/api/(.*)",
+            "destination": "/api/index.js"
+        },
+        {
+            "source": "/admin-api/(.*)",
+            "destination": "/api/index.js"
+        },
+        {
+            "source": "/courier-api/(.*)",
+            "destination": "/api/index.js"
+        },
+        {
+            "source": "/bot",
+            "destination": "/api/bot.js"
+        },
+        {
+            "source": "/editor.js",
+            "destination": "/editor/editor.js"
+        },
+        {
+            "source": "/bootstrap.min_custom.css",
+            "destination": "/app/bootstrap.min_custom.css"
+        },
+        {
+            "source": "/app.js",
+            "destination": "/app/app.js"
+        },
+        {
+            "source": "/courier.js",
+            "destination": "/courier/courier.js"
+        }
+    ]
+}

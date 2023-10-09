@@ -1,0 +1,217 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://pancitos.alwaysdata.net/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/app/custom.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+        integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <title>Editor</title>
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+</head>
+
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <ul class="nav nav-tabs" role="tablist">
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link active" id="sweets-tab" data-bs-toggle="tab" data-bs-target="#sweets"
+                            type="button" role="tab" aria-controls="sweets" aria-selected="true">Goods</button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="categories-tab" data-bs-toggle="tab" data-bs-target="#categories-t"
+                            type="button" role="tab" aria-controls="categories-t"
+                            aria-selected="false">Categories</button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="users-tab" data-bs-toggle="tab" data-bs-target="#users"
+                            type="button" role="tab" aria-controls="users" aria-selected="false">Users</button>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+
+        <div class="tab-content mb-3">
+            <div class="tab-pane fade show active" id="sweets" role="tabpanel" aria-labelledby="sweets-tab">
+                <div class="row mt-3">
+                    <div class="col-12">
+                        <h2>Add a new product</h2>
+                        <form id="addsweet">
+                            <div class="row g-3 mb-3">
+                                <div class="col-6">
+                                    <div class="form-floating">
+                                        <input type="text" name="name" id="sweet_name" class="form-control"
+                                            placeholder="Sweet Cake">
+                                        <label for="sweet_name">Name:</label>
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="form-floating">
+                                        <input type="number" name="cost" id="sweet_cost" class="form-control"
+                                            placeholder="250.99">
+                                        <label for="sweet_cost">Price:</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row g-3 mb-3">
+                                <div class="col-6">
+                                    <div class="form-floating">
+                                        <input type="number" name="discount" id="sweet_discount" class="form-control"
+                                            placeholder="0.1 = 10%" min="0.0" max="0.9" value="0">
+                                        <label for="sweet_discount">Discount:</label>
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="form-floating">
+                                        <input type="number" name="quantity" id="sweet_quantity" class="form-control"
+                                            placeholder="100">
+                                        <label for="sweet_quantity">Quantity:</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row g-3 mb-3">
+                                <div class="col-8">
+                                    <div class="form-floating">
+                                        <input type="number" name="wt" id="sweet_wt" class="form-control"
+                                            placeholder="170">
+                                        <label for="sweet_wt">Weight:</label>
+                                    </div>
+                                </div>
+                                <div class="col-4">
+                                    <div class="form-floating">
+                                        <input type="file" class="form-control" name="" id="sweet_picture">
+                                        <label for="sweet_picture">Picture:</label>
+                                        <input type="hidden" name="picture_base64" id="sweet_picture_base64">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row g-3 mb-3">
+                                <div class="col-12" id="categories">
+                                    <label>Choose Categories:</label>
+
+                                </div>
+                            </div>
+                            <div class="row g-3 mb-3">
+                                <div class="col-12">
+                                    <div class="form-floating">
+                                        <textarea class="form-control" name="description" id="sweet_description"
+                                            rows="5"></textarea>
+                                        <label for="sweet_description">Short description:</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row g-3 mb-3">
+                                <div class="col-12">
+                                    <input class="btn btn-primary" type="submit" value="ADD">
+                                    <input class="btn btn-secondary" type="reset" value="RESET">
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-12">
+                        <h2>Available goods</h2>
+                        <table class="table" id="sweets">
+                            <thead>
+                                <tr id="cols">
+                                    <th>Name</th>
+                                    <th style="min-width: 100px !important;">Price</th>
+                                    <th style="min-width: 100px !important;">Discount</th>
+                                    <th style="min-width: 100px !important;">Quantity</th>
+                                    <th>Purchased (total)</th>
+                                </tr>
+                            </thead>
+                            <tbody id="sweets-contents">
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tab-pane fade" id="categories-t" role="tabpanel" aria-labelledby="categories-tab">
+                <div class="row">
+                    <div class="col-12">
+                        <h2>Add a new category</h2>
+                        <form id="addcategory">
+                            <div class="row g-3 mb-3">
+                                <div class="col-6">
+                                    <div class="form-floating">
+                                        <input type="text" name="name" id="category_name" class="form-control"
+                                            placeholder="Name">
+                                        <label for="category_name">Name:</label>
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="form-floating">
+                                        <textarea name="description" id="category_description"
+                                            class="form-control"></textarea>
+                                        <label for="category_description">Description:</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row g-3 mb-3">
+                                <div class="col-8">
+                                    <input class="btn btn-primary" type="submit" value="ADD">
+                                    <input class="btn btn-secondary" type="reset" value="RESET">
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-12">
+                        <h2>Categories</h2>
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th style="min-width: 100px !important;">Name</th>
+                                    <th>Description</th>
+                                </tr>
+                            </thead>
+                            <tbody id="categories-contents">
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tab-pane fade" id="users" role="tabpanel" aria-labelledby="users-tab">
+                <div class="row">
+                    <div class="col-12">
+                        <h2>Users</h2>
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Full Name</th>
+                                    <th>@username</th>
+                                    <th>Discount</th>
+                                </tr>
+                            </thead>
+                            <tbody id="users-contents">
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
+    <script src="editor.js"></script>
+</body>
+
+</html>
