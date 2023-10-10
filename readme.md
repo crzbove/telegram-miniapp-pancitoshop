@@ -158,8 +158,6 @@ If you are using Vercel, your vercel.json file should look like this:
 }
 ```
 The following functions are called via the `/api/:type` endpoint:
-
-For `:type` equal to "sweets" (GET), the following functions are called:
 | :type | Called Function  | Arguments                |
 |--------------|----------------------------------------|------------------------------------------|
 | "sweets"     | GetSweets("", user.id)               | Depending on the presence of `idcategory`  |
@@ -169,7 +167,7 @@ For `:type` equal to "sweets" (GET), the following functions are called:
 | "add_cart"   | AddToCart(idssweet, user.id, counts) | `idssweet`, `user.id`, `counts`           |
 | "like"       | AddToFavorites(request.body.idsweet, user.id) | `request.body.idsweet`, `user.id`  |
 
-For `:type` equal to "sweets" (POST), the following functions are called:
+The following functions are called via the `/admin-api/:type` endpoint:
 | :type | Called Function  | Arguments                |
 |--------------|----------------------------------------|------------------------------------------|
 | "getcategories" | GetAllCategories()               | None                                      |
@@ -183,15 +181,12 @@ For `:type` equal to "sweets" (POST), the following functions are called:
 | "deletesweet" | RemoveSweet()                    | idsweet                                   |
 | "deletecategory" | DeleteCategory()                | id                                        |
 
-For `:type` equal to "getavailableorders" (GET), the following functions are called:
+The following functions are called via the `/courier-api/:type` endpoint:
 | :type  | Called Function  | Arguments                                |
 |----------------------|-----------------------|------------------------------------------------------------|
-| "getavailableorders" | GetAvailableOrders() | user.id     |
-
-For `:type` equal to "updatestatus" (POST), the following functions are called:
-| :type | Called Function  | Arguments                |
+| "getavailableorders" (GET) | GetAvailableOrders() | user.id     |
 |------------------|-------------------|------------------------|
-| "updatestatus"   | UpdateOrderStatus() | idorder, user.id, body.statusnew |
+| "updatestatus" (POST)   | UpdateOrderStatus() | idorder, user.id, body.statusnew |
 
 All arguments are passed either in the request body for POST requests or as GET parameters for GET requests. Additionally, `telegramInitData` is included in the query string after `:type`.
 
@@ -316,5 +311,3 @@ Main page for the courier section. Similar to all other pages.
 Logic for generating the list of active orders. Each courier can only see their own unfinished and new orders.
 
 Requests are sent to the domain specified in the `API_ENDPOINT` constant with the addition of `telegramInitData` in the query string.
-
-P.S. You can create a universal page for all three roles and redirect the respective user groups to the appropriate pages from the backend. I'll do this in the near future 🤞.
